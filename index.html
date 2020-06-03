@@ -14,9 +14,10 @@
     <meta name="theme-color" content="#2A333A">
 </head>
 
-<body>
+<body id="moveArea">
 <!--[if IE]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
 <![endif]-->
 
 <!-- Add your site or application content here -->
@@ -25,18 +26,50 @@
     <p>Trying out CSS transforms &amp; animations.</p>
 </div>
 
-<div class="cube">
-    <div class="cube-face cube-face-front"></div>
-    <div class="cube-face cube-face-left"></div>
-    <div class="cube-face cube-face-back"></div>
-    <div class="cube-face cube-face-right"></div>
-    <div class="cube-face cube-face-top"></div>
-    <div class="cube-face cube-face-bottom"></div>
+<ul class="tabs">
+    <li class="active-tab">Spinny cube</li>
+    <li>Googly eyes</li>
+    <li>Spinny sphere</li>
+    <li class="lasers">LASERS!</li>
+</ul>
+
+<div class="tabs-content">
+    <section>
+        <div class="cube">
+            <div class="cube-face cube-face-front"></div>
+            <div class="cube-face cube-face-left"></div>
+            <div class="cube-face cube-face-back"></div>
+            <div class="cube-face cube-face-right"></div>
+            <div class="cube-face cube-face-top"></div>
+            <div class="cube-face cube-face-bottom"></div>
+        </div>
+    </section>
+    <section>
+        <div class='googly-eyes'>
+            <div class='googly-eyes-container'>
+                <div class='eye'></div>
+                <div class='eye'></div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="sphere" class="sphere-container"></div>
+    </section>
+    <section>
+        <div class='googly-eyes with-laser'>
+            <div class='googly-eyes-container'>
+                <div class='eye'></div>
+                <div class='eye'></div>
+            </div>
+        </div>
+    </section>
 </div>
 
+<div class="vaporwave"></div>
 
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
 <script src="assets/js/main.js"></script>
 
 </body>
