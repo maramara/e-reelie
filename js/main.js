@@ -9,7 +9,7 @@ $(function () {
         obj = document.createElement("audio");
 
     // Load tune
-    obj.src = "../assets/sound/vap-tune.opus";
+    obj.src = "sound/vap-tune.opus";
 
     // Show content of active tab on loads
     $contentlis.eq(activeIndex).show();
@@ -62,7 +62,7 @@ var geometry = new THREE.SphereGeometry(24, 32, 32 );
 THREE.ImageUtils.crossOrigin = true;
 var textureLoader = new THREE.TextureLoader();
 textureLoader.crossOrigin = true;
-textureLoader.load('../assets/img/ereeelie.jpg', function(texture) {
+textureLoader.load('img/ereelie.jpg', function(texture) {
     texture.wrapS = texture.wrapT =   THREE.RepeatWrapping;
     texture.repeat.set( 1, 1 );
     var material = new THREE.MeshLambertMaterial( {map: texture} );

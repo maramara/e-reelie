@@ -5,7 +5,7 @@ var del = require('del');
 
 // Clean _dist
 gulp.task('clean', function(done) {
-  del('_dist');
+  del('css');
   done();
 });
 
@@ -17,18 +17,8 @@ gulp.task('styles', function() {
       ])
       .pipe(sass())
       .pipe(minify())
-      .pipe(gulp.dest('_dist/styles'))
-});
-
-// Copy html
-gulp.task('html', function() {
-    return gulp.src('*.html').pipe(gulp.dest('_dist'));
-});
-
-// Copy assets
-gulp.task('assets', function() {
-  return gulp.src('assets/**/*').pipe(gulp.dest('_dist/assets'));
+      .pipe(gulp.dest('css'))
 });
 
 // Default task - build dist
-gulp.task('default', gulp.series('clean', 'styles', 'html', 'assets'));
+gulp.task('default', gulp.series('clean', 'styles'));
