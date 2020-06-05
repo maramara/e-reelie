@@ -43,6 +43,8 @@
                 <input type="range" min="0" max="800" value="200" step="1" id="cubeSize"/>
                 <label for="animation">Animation</label>
                 <input type="range" min="0" max="1000" value="360" step="1" id="animation"/>
+                <label for="opacity">Opacity</label>
+                <input type="range" min="10" max="100" value="90" step="1" id="opacity"/>
             </div>
 
             <div class="cube">
@@ -67,7 +69,13 @@
         <div id="sphere" class="sphere-container"></div>
     </section>
     <section>
-        <div class='googly-eyes with-laser'>
+        <div class='googly-eyes'>
+            <div class='googly-eyes-container'>
+                <div class='eye'></div>
+                <div class='eye'></div>
+            </div>
+            <div class="laser laser-1"></div>
+            <div class="laser laser-2"></div>
         </div>
     </section>
 </div>

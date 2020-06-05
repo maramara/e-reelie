@@ -74,15 +74,25 @@ $(function () {
             '0% { transform: rotateX(0deg) rotateY(' + size + 'deg) rotateZ(0deg); }' +
             '100% { transform: rotateX(' + size*2 + 'deg) rotateY(-360deg) rotateZ(' + size*4 + 'deg) }' +
             '}');
+
         cssAnimation.appendChild(rules);
         document.getElementsByTagName("head")[0].appendChild(cssAnimation);
+    });
+
+    $("#opacity").on("input change",function(){
+        var size = 0;
+        size = $(this).val();
+
+        $('.cube-face').css({
+            'opacity' : size/100
+        });
     });
 
 
     // Eye tracking
 
     $("#moveArea").mousemove(function (event) {
-        var eye = $(".eye");
+        var eye = $(".googly-eye");
         var x = (eye.offset().left) + (eye.width() / 2);
         var y = (eye.offset().top) + (eye.height() / 2);
         var rad = Math.atan2(event.pageX - x, event.pageY - y);
@@ -100,12 +110,19 @@ $(function () {
 
     var area = $('#googlyEyes'),
         eye = $(".googly-eye");
+        body = $('body');
 
     area.mousedown(function (event) {
         eye.addClass('eye-squint');
+        body.css({
+            'background' : '#BF2222'
+        });
     });
     area.mouseup(function (event) {
         eye.removeClass('eye-squint');
+        body.css({
+            'background' : '#2A333A'
+        });
     });
 });
 
@@ -167,4 +184,3 @@ var render = function () {
     mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
 };
-

@@ -11,7 +11,7 @@ $dimensions: 200px;
 // General
 body{
   background: $color-dark;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -274,4 +274,105 @@ input[type=range]::-webkit-slider-thumb {
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: $color-accent;
+}
+
+
+// Lasers
+$base-white: #fff;
+$base-black: #000;
+
+$deep-gray: #373E38;
+$orange-pink: #EE6862;
+$deep-blue: #016583;
+$green: #73AD42;
+$beige: #D7CBB5;
+$yellow: #FABE0E;
+
+
+@keyframes disco-lights-mode-1 {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(-145deg);
+  }
+}
+
+@keyframes disco-lights-mode-2 {
+  0% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(145deg);
+  }
+}
+
+@keyframes disco-lights-mode-3 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(165deg);
+  }
+}
+
+@keyframes disco-lights-mode-4 {
+  0% {
+    transform: rotate(-135deg);
+  }
+  100% {
+    transform: rotate(135deg);
+  }
+}
+
+
+.laser {
+  position: relative;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 63px;
+    left: 120px;
+    width: 0;
+    height: 20px;
+    border-right: 100vw solid #4444dd;
+    border-top: $global-spacing solid transparent;
+    border-bottom: $global-spacing solid transparent;
+    border-radius: 50%;
+    transform-origin: left center;
+    filter: drop-shadow(10px 0 5px #4444dd);
+    animation: disco-lights-mode-1 2s infinite alternate linear;
+
+  }
+
+
+  &.laser-1 {
+    &::before {
+      border-right-color: rgba($green, .4);
+      animation-name: disco-lights-mode-1;
+      animation-duration: 1.5s;
+    }
+
+    &::after {
+      border-right-color: rgba($orange-pink, .4);
+      animation-name: disco-lights-mode-2;
+      animation-duration: 1.5s;
+    }
+  }
+
+  &.laser-2 {
+    &::before {
+      border-right-color: rgba($yellow, .4);
+      animation-name: disco-lights-mode-3;
+      animation-duration: 1.5s;
+    }
+
+    &::after {
+      border-right-color: rgba($deep-blue, .4);
+      animation-name: disco-lights-mode-4;
+      animation-duration: 2s;
+    }
+  }
+
 }
