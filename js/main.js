@@ -1,17 +1,15 @@
-
 // Tab control
 $(function () {
+
+    // Tabs
 
     var activeIndex = $('.active-tab').index(),
         $contentlis = $('.tabs-content section'),
         $tabslis = $('.tabs li'),
         background = $(".vaporwave"),
-        obj = document.createElement("audio");
+        tune = document.createElement("audio");
 
-    // Load tune
-    obj.src = "sound/vap-tune.opus";
-
-    // Show content of active tab on loads
+    tune.src = "sound/vap-tune.opus";
     $contentlis.eq(activeIndex).show();
 
     $('.tabs').on('click', 'li', function (e) {
@@ -19,30 +17,95 @@ $(function () {
             index = $current.index();
 
         background.hide();
-        obj.pause();
+        tune.pause();
         $tabslis.removeClass('active-tab');
         $current.addClass('active-tab');
         $contentlis.hide().eq(index).show();
         if ($current.hasClass('lasers')) {
             background.show();
-            obj.play();
+            tune.play();
         }
     });
-});
 
 
-// Eye tracking
-$("#moveArea").mousemove(function(event) {
-    var eye = $(".eye");
-    var x = (eye.offset().left) + (eye.width() / 2);
-    var y = (eye.offset().top) + (eye.height() / 2);
-    var rad = Math.atan2(event.pageX - x, event.pageY - y);
-    var rot = (rad * (180 / Math.PI) * -1) + 180;
-    eye.css({
-        '-webkit-transform': 'rotate(' + rot + 'deg)',
-        '-moz-transform': 'rotate(' + rot + 'deg)',
-        '-ms-transform': 'rotate(' + rot + 'deg)',
-        'transform': 'rotate(' + rot + 'deg)'
+    // Cube manipulation
+
+    $("#faceSize").on("input change",function(){
+        var size = 0;
+        size = $(this).val();
+
+        $('.cube-face').css({
+            'width' : size + 'px',
+            'height' : size + 'px'
+        });
+    });
+
+    $("#cubeSize").on("input change",function(){
+        var size = 0;
+        size = $(this).val();
+
+        $('.cube-face-front').css({
+            'transform' : 'translateZ(' + size + 'px)'
+        });
+        $('.cube-face-left').css({
+            'transform' : 'rotateY(90deg) translateZ(' + size + 'px)'
+        });
+        $('.cube-face-back').css({
+            'transform' : 'translateZ(-' + size + 'px)'
+        });
+        $('.cube-face-right').css({
+            'transform' : 'rotateY(90deg) translateZ(-' + size + 'px)'
+        });
+        $('.cube-face-top').css({
+            'transform' : 'rotateX(90deg) translateZ(-' + size + 'px)'
+        });
+        $('.cube-face-bottom').css({
+            'transform' : 'rotateX(90deg) translateZ(' + size + 'px)'
+        });
+    });
+
+    $("#animation").on("input change",function(){
+        var size = 0;
+        size = $(this).val();
+
+        var cssAnimation = document.createElement('style');
+        cssAnimation.type = 'text/css';
+        var rules = document.createTextNode('@keyframes rotationMainContainer {' +
+            '0% { transform: rotateX(0deg) rotateY(' + size + 'deg) rotateZ(0deg); }' +
+            '100% { transform: rotateX(' + size*2 + 'deg) rotateY(-360deg) rotateZ(' + size*4 + 'deg) }' +
+            '}');
+        cssAnimation.appendChild(rules);
+        document.getElementsByTagName("head")[0].appendChild(cssAnimation);
+    });
+
+
+    // Eye tracking
+
+    $("#moveArea").mousemove(function (event) {
+        var eye = $(".eye");
+        var x = (eye.offset().left) + (eye.width() / 2);
+        var y = (eye.offset().top) + (eye.height() / 2);
+        var rad = Math.atan2(event.pageX - x, event.pageY - y);
+        var rot = (rad * (180 / Math.PI) * -1) + 180;
+        eye.css({
+            '-webkit-transform': 'rotate(' + rot + 'deg)',
+            '-moz-transform': 'rotate(' + rot + 'deg)',
+            '-ms-transform': 'rotate(' + rot + 'deg)',
+            'transform': 'rotate(' + rot + 'deg)'
+        });
+    });
+
+
+    // Inflict pain
+
+    var area = $('#googlyEyes'),
+        eye = $(".googly-eye");
+
+    area.mousedown(function (event) {
+        eye.addClass('eye-squint');
+    });
+    area.mouseup(function (event) {
+        eye.removeClass('eye-squint');
     });
 });
 
@@ -50,24 +113,23 @@ $("#moveArea").mousemove(function(event) {
 // Sphere rotation
 
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
 var mesh;
 
 var renderer = new THREE.WebGLRenderer({alpha: true});
-renderer.setSize( 500, 250 );
+renderer.setSize(500, 250);
 document.getElementById("sphere").appendChild(renderer.domElement);
 
-// add icosahedron
-var geometry = new THREE.SphereGeometry(24, 32, 32 );
+var geometry = new THREE.SphereGeometry(24, 32, 32);
 THREE.ImageUtils.crossOrigin = true;
 var textureLoader = new THREE.TextureLoader();
 textureLoader.crossOrigin = true;
-textureLoader.load('img/ereelie.jpg', function(texture) {
-    texture.wrapS = texture.wrapT =   THREE.RepeatWrapping;
-    texture.repeat.set( 1, 1 );
-    var material = new THREE.MeshLambertMaterial( {map: texture} );
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+textureLoader.load('img/ereelie.jpg', function (texture) {
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(1, 1);
+    var material = new THREE.MeshLambertMaterial({map: texture});
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
     render();
 });
@@ -75,34 +137,33 @@ textureLoader.load('img/ereelie.jpg', function(texture) {
 
 camera.position.z = 100;
 
-// so many lights
-var light = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 0, 1, 0 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 1, 0);
+scene.add(light);
 
-var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-light.position.set( 0, -1, 0 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 0.5);
+light.position.set(0, -1, 0);
+scene.add(light);
 
-var light = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 1, 0, 0 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(1, 0, 0);
+scene.add(light);
 
-var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-light.position.set( 0, 0, 1 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 0.5);
+light.position.set(0, 0, 1);
+scene.add(light);
 
-var light = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 0, 0, -1 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 0, -1);
+scene.add(light);
 
-var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-light.position.set( -1, 0, 0 );
-scene.add( light );
+var light = new THREE.DirectionalLight(0xffffff, 0.5);
+light.position.set(-1, 0, 0);
+scene.add(light);
 
 
 var render = function () {
-    requestAnimationFrame( render );
+    requestAnimationFrame(render);
     mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
 };

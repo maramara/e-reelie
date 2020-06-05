@@ -3,12 +3,15 @@
 // Variables
 $color-light: #f9f9f9;
 $color-dark: #2A333A;
+$color-accent: #FF512F;
 $img-background: url("../img/ereelie.jpg") no-repeat;
+$global-spacing: 16px;
 $dimensions: 200px;
 
 // General
 body{
   background: $color-dark;
+  overflow-x: hidden;
 }
 
 body {
@@ -17,57 +20,67 @@ body {
   font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6
-{
+h1 {
   font-weight: 700;
+  font-size: 2em;
+}
+
+label {
+  display: block;
 }
 
 .header {
-  padding: 2em 1em;
+  padding: $global-spacing*2 $global-spacing;
   text-align: center;
 }
 
 // Tabs
 
 .tabs {
-  margin-top: 20px;
-  margin-bottom: 80px;
+  margin-top: $global-spacing;
+  margin-bottom: $global-spacing*5;
   padding: 0;
   list-style: none;
   display: flex;
   justify-content: center;
+  font-weight: 700;
   li {
     cursor: pointer;
-    color: #fff;
-    padding: 5px 10px;
+    border-radius: $global-spacing*2;
+    background-color: rgba($color-light, 0.1);
+    color: $color-accent;
+    padding: $global-spacing;
+    margin: 0 $global-spacing/2;
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+      background-color: rgba($color-light, 0.2);
+    }
     &.active-tab {
-      background: #fafafa;
-      color: black;
-      &:after {
-        width: 100%;
-        height: 2px;
-        position: absolute;
-        content: "";
-        bottom: -0.1em;
-        left: 0;
-        background: white;
-      }
+      background-color: $color-accent;
+      color: $color-light;
     }
   }
 }
 
 .tabs-content {
-  padding: 20px;
+  padding: $global-spacing;
 
   section {
     display: none;
   }
 }
 
+// Grid
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 100%;
+  max-width: 70%;
+  margin: 0 auto;
+}
 
 // Spinny cube
 
-.cube{
+.cube {
   width: $dimensions;
   height: $dimensions;
   position: relative;
@@ -81,7 +94,7 @@ h1, h2, h3, h4, h5, h6
   animation-play-state: running;
 }
 
-.cube-face{
+.cube-face {
   width: $dimensions;
   height: $dimensions;
   position: absolute;
@@ -136,9 +149,9 @@ h1, h2, h3, h4, h5, h6
   position: relative;
   background: $img-background;
   background-size: cover;
-  border: 6px solid #82898e;
-  border-radius: 6px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  border: $global-spacing/4 solid rgba($color-light, 0.2);
+  border-radius: $global-spacing/2.5;
+  box-shadow: 0 0 $global-spacing rgba(0,0,0,0.5);
   transition: transform 0.2s ease-out;
   &:hover {
     transform: rotate(-3deg);
@@ -153,9 +166,10 @@ h1, h2, h3, h4, h5, h6
   position: relative;
   display: inline-block;
   border-radius: 50%;
-  height: 24px;
-  width: 24px;
+  height: $global-spacing*1.5;
+  width: $global-spacing*1.5;
   background: $color-light;
+  transition: all 0.1s ease-in-out;
   &:last-child {
     margin-left: 23px;
     top: -2px;
@@ -169,12 +183,21 @@ h1, h2, h3, h4, h5, h6
     background: $color-dark;
     border-radius: 50%;
     content: " ";
+    transition: all 0.1s ease-in-out;
+  }
+  &-squint {
+    width: $global-spacing*1.8;
+    height: $global-spacing*1.8;
+    background: #fff0f4;
+    &:after {
+      width: $global-spacing;
+      height: $global-spacing;
+    }
   }
 }
 
 
 // Laser background
-
 .vaporwave {
   display: none;
   width: 100%;
@@ -200,7 +223,7 @@ h1, h2, h3, h4, h5, h6
 .vaporwave:after {
   -webkit-mask-image: -webkit-gradient(linear, left 90%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   mask-image: gradient(linear, left 90%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-  transform: perspective(400px) rotateX(40deg) scale(2,1) translateZ(0);
+  transform: perspective($dimensions*2) rotateX(40deg) scale(2,1) translateZ(0);
   content: ""; display: block; position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: 100vh;
   padding: 1px;
   -webkit-background-clip: content-box;
@@ -209,7 +232,7 @@ h1, h2, h3, h4, h5, h6
   transform-origin: bottom center;
   will-change: transform;
   background-position: center bottom;
-  background-size: 40px 40px;
+  background-size: $global-spacing*2.5 $global-spacing*2.5;
   background-image:
           linear-gradient(to right, #ef00ff 2px, transparent 2px),
           linear-gradient(to bottom, #ef00ff 1px, transparent 2px);
@@ -219,5 +242,36 @@ h1, h2, h3, h4, h5, h6
 // Spinny sphere container
 .sphere-container {
   margin: 0 auto;
-  width: 500px;
+  width: $dimensions*2;
+}
+
+
+// Native slider style
+input[type=range] {
+  -webkit-appearance: none;
+  margin: $global-spacing 0 $global-spacing*2;
+  width: $global-spacing*15;
+  border-radius: $global-spacing/2;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: $global-spacing/2;
+  cursor: pointer;
+  background: $color-accent;
+  border-radius: $global-spacing/2;
+}
+input[type=range]::-webkit-slider-thumb {
+  height: $global-spacing*1.5;
+  width: $global-spacing*1.5;
+  border-radius: $global-spacing;
+  background: lighten($color-accent, 5%);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -$global-spacing/2;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $color-accent;
 }

@@ -35,20 +35,31 @@
 
 <div class="tabs-content">
     <section>
-        <div class="cube">
-            <div class="cube-face cube-face-front"></div>
-            <div class="cube-face cube-face-left"></div>
-            <div class="cube-face cube-face-back"></div>
-            <div class="cube-face cube-face-right"></div>
-            <div class="cube-face cube-face-top"></div>
-            <div class="cube-face cube-face-bottom"></div>
+        <div class="grid">
+            <div class="controls">
+                <label for="faceSize">Face size</label>
+                <input type="range" min="50" max="800" value="200" step="1" id="faceSize"/>
+                <label for="cubeSize">Cube size</label>
+                <input type="range" min="0" max="800" value="200" step="1" id="cubeSize"/>
+                <label for="animation">Animation</label>
+                <input type="range" min="0" max="1000" value="360" step="1" id="animation"/>
+            </div>
+
+            <div class="cube">
+                <div class="cube-face cube-face-front"></div>
+                <div class="cube-face cube-face-left"></div>
+                <div class="cube-face cube-face-back"></div>
+                <div class="cube-face cube-face-right"></div>
+                <div class="cube-face cube-face-top"></div>
+                <div class="cube-face cube-face-bottom"></div>
+            </div>
         </div>
     </section>
     <section>
-        <div class='googly-eyes'>
+        <div class='googly-eyes' id="googlyEyes">
             <div class='googly-eyes-container'>
-                <div class='eye'></div>
-                <div class='eye'></div>
+                <div class='eye googly-eye'></div>
+                <div class='eye googly-eye'></div>
             </div>
         </div>
     </section>
@@ -57,10 +68,6 @@
     </section>
     <section>
         <div class='googly-eyes with-laser'>
-            <div class='googly-eyes-container'>
-                <div class='eye'></div>
-                <div class='eye'></div>
-            </div>
         </div>
     </section>
 </div>
