@@ -4,6 +4,10 @@
 $color-light: #f9f9f9;
 $color-dark: #2A333A;
 $color-accent: #FF512F;
+$color-orange: #ee7b3a;
+$color-blue: #306ed5;
+$color-green: #31b84b;
+$color-yellow: #fad231;
 $img-background: url("../img/ereelie.jpg") no-repeat;
 $global-spacing: 16px;
 $dimensions: 200px;
@@ -45,6 +49,8 @@ label {
   justify-content: center;
   font-weight: 700;
   li {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     border-radius: $global-spacing*2;
     background-color: rgba($color-light, 0.1);
@@ -52,6 +58,7 @@ label {
     padding: $global-spacing;
     margin: 0 $global-spacing/2;
     transition: background-color 0.2s ease-in-out;
+    text-align: center;
     &:hover {
       background-color: rgba($color-light, 0.2);
     }
@@ -84,7 +91,8 @@ label {
   width: $dimensions;
   height: $dimensions;
   position: relative;
-  margin: 0 auto;
+  margin: 60px auto 0;
+  left: -100px;
   transform-style: preserve-3d;
   transform: rotateY(0deg) translateZ(-200px);
   animation-name: rotationMainContainer;
@@ -196,6 +204,13 @@ label {
   }
 }
 
+.with-filter {
+  filter: hue-rotate(-95deg);
+  &:hover {
+    transform: rotate(0deg);
+  }
+}
+
 
 // Laser background
 .vaporwave {
@@ -278,18 +293,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 
 // Lasers
-$base-white: #fff;
-$base-black: #000;
 
-$deep-gray: #373E38;
-$orange-pink: #EE6862;
-$deep-blue: #016583;
-$green: #73AD42;
-$beige: #D7CBB5;
-$yellow: #FABE0E;
-
-
-@keyframes disco-lights-mode-1 {
+@keyframes lights-mode-1 {
   0% {
     transform: rotate(90deg);
   }
@@ -298,7 +303,7 @@ $yellow: #FABE0E;
   }
 }
 
-@keyframes disco-lights-mode-2 {
+@keyframes lights-mode-2 {
   0% {
     transform: rotate(-90deg);
   }
@@ -307,18 +312,18 @@ $yellow: #FABE0E;
   }
 }
 
-@keyframes disco-lights-mode-3 {
+@keyframes lights-mode-3 {
   0% {
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(165deg);
+    transform: rotate(270deg);
   }
 }
 
-@keyframes disco-lights-mode-4 {
+@keyframes lights-mode-4 {
   0% {
-    transform: rotate(-135deg);
+    transform: rotate(-180deg);
   }
   100% {
     transform: rotate(135deg);
@@ -336,43 +341,63 @@ $yellow: #FABE0E;
     left: 120px;
     width: 0;
     height: 20px;
-    border-right: 100vw solid #4444dd;
+    border-right: 100vw solid $color-blue;
     border-top: $global-spacing solid transparent;
     border-bottom: $global-spacing solid transparent;
     border-radius: 50%;
     transform-origin: left center;
-    filter: drop-shadow(10px 0 5px #4444dd);
-    animation: disco-lights-mode-1 2s infinite alternate linear;
+    filter: drop-shadow(10px 0 5px $color-blue);
+    animation: lights-mode-1 1.5s infinite alternate linear;
 
   }
 
 
   &.laser-1 {
     &::before {
-      border-right-color: rgba($green, .4);
-      animation-name: disco-lights-mode-1;
+      border-right-color: rgba($color-green, .4);
+      animation-name: lights-mode-1;
       animation-duration: 1.5s;
     }
 
     &::after {
-      border-right-color: rgba($orange-pink, .4);
-      animation-name: disco-lights-mode-2;
+      border-right-color: rgba($color-orange, .4);
+      animation-name: lights-mode-2;
       animation-duration: 1.5s;
     }
   }
 
   &.laser-2 {
     &::before {
-      border-right-color: rgba($yellow, .4);
-      animation-name: disco-lights-mode-3;
+      border-right-color: rgba($color-yellow, .4);
+      animation-name: lights-mode-3;
       animation-duration: 1.5s;
     }
 
     &::after {
-      border-right-color: rgba($deep-blue, .4);
-      animation-name: disco-lights-mode-4;
+      border-right-color: rgba($color-blue, .4);
+      animation-name: lights-mode-4;
       animation-duration: 2s;
     }
   }
 
+}
+
+
+// Unicorn
+
+@keyframes appear {
+  0% {
+    right: -110px;
+  }
+  100% {
+    right: -30px;
+  }
+}
+
+.unicorn {
+  position: absolute;
+  top: 300px;
+  right: -100px;
+  animation: appear .64s infinite alternate linear;
+  animation-delay: 10s;
 }
