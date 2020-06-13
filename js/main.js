@@ -3,25 +3,26 @@ $(function () {
 
     // Tabs
 
-    var activeIndex = $('.active-tab').index(),
-        $contentlis = $('.tabs-content section'),
-        $tabslis = $('.tabs li'),
+    var active = $('.active-tab').index(),
+        content = $('.tabs-content section'),
+        tab = $('.tabs li'),
         background = $(".vaporwave"),
         tune = document.createElement("audio");
 
     tune.src = "sound/vap-tune.opus";
-    $contentlis.eq(activeIndex).show();
+    content.eq(active).show();
 
     $('.tabs').on('click', 'li', function (e) {
-        var $current = $(e.currentTarget),
-            index = $current.index();
+        var current = $(e.currentTarget),
+            index = current.index();
 
         background.hide();
         tune.pause();
-        $tabslis.removeClass('active-tab');
-        $current.addClass('active-tab');
-        $contentlis.hide().eq(index).show();
-        if ($current.hasClass('lasers')) {
+        tab.removeClass('active-tab');
+        current.addClass('active-tab');
+        content.hide().eq(index).show();
+
+        if (current.hasClass('lasers')) {
             background.show();
             tune.play();
         }
@@ -72,7 +73,7 @@ $(function () {
         cssAnimation.type = 'text/css';
         var rules = document.createTextNode('@keyframes rotationMainContainer {' +
             '0% { transform: rotateX(0deg) rotateY(' + size + 'deg) rotateZ(0deg); }' +
-            '100% { transform: rotateX(' + size*2 + 'deg) rotateY(-360deg) rotateZ(' + size*4 + 'deg) }' +
+            '100% { transform: rotateX(' + size*2 + 'deg) rotateY(-360deg) rotateZ(' + size*3 + 'deg) }' +
             '}');
 
         cssAnimation.appendChild(rules);
@@ -88,6 +89,15 @@ $(function () {
         });
     });
 
+
+    // Lasers color filter
+
+    setInterval(function() {
+        var number = Math.floor(Math.random() * 180);
+        $('.with-filter').css({
+            'filter' : 'hue-rotate(' + number + 'deg)'
+        });
+    },500);
 
     // Eye tracking
 
@@ -106,7 +116,7 @@ $(function () {
     });
 
 
-    // Inflict pain
+    // Googly eyes press
 
     var area = $('#googlyEyes'),
         eye = $(".googly-eye");
