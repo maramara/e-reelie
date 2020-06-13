@@ -134,6 +134,14 @@ $(function () {
             'background' : '#2A333A'
         });
     });
+
+    // Unfocused window
+    $(window).blur(function() {
+        document.title = "E-reelie?";
+    });
+    $(window).focus(function() {
+        document.title = "CSS exercises";
+    });
 });
 
 
