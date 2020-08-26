@@ -27,25 +27,25 @@
     <p>Trying out CSS transforms &amp; animations by using a sticker.</p>
 </div>
 
-<ul class="tabs">
-    <li class="active-tab">Spinny cube</li>
-    <li>Googly eyes</li>
-    <li>Spinny sphere</li>
-    <li class="lasers">LASERS!</li>
+<ul class="tabs" role="tablist" aria-label="Tab navigation">
+    <li id="cube-nav" class="active-tab" role="tab" aria-selected="true" aria-controls="cube">Spinny cube</li>
+    <li id="googly-nav" role="tab" aria-selected="true" aria-controls="googly">Googly eyes</li>
+    <li id="spinny-nav" role="tab" aria-selected="true" aria-controls="spinny">Spinny sphere</li>
+    <li id="circus-nav" role="tab" aria-selected="true" aria-controls="circus" class="lasers">LASERS!</li>
 </ul>
 
 <div class="tabs-content">
-    <section>
+    <section id="cube" role="tabpanel" tabindex="0" aria-labelledby="cube-nav">
         <div class="grid">
             <div class="controls">
                 <label for="faceSize">Face size</label>
-                <input type="range" min="50" max="800" value="200" step="1" id="faceSize"/>
+                <input type="range" min="50" max="800" value="200" step="1" id="faceSize" aria-valuemin="50" aria-valuemax="800"/>
                 <label for="cubeSize">Cube size</label>
-                <input type="range" min="0" max="800" value="200" step="1" id="cubeSize"/>
+                <input type="range" min="0" max="800" value="200" step="1" id="cubeSize" aria-valuemin="0" aria-valuemax="800"/>
                 <label for="animation">Animation</label>
-                <input type="range" min="0" max="1000" value="360" step="1" id="animation"/>
+                <input type="range" min="0" max="1000" value="360" step="1" id="animation" aria-valuemin="0" aria-valuemax="1000"/>
                 <label for="opacity">Opacity</label>
-                <input type="range" min="10" max="100" value="90" step="1" id="opacity"/>
+                <input type="range" min="10" max="100" value="90" step="1" id="opacity" aria-valuemin="10" aria-valuemax="100"/>
             </div>
 
             <div class="cube">
@@ -58,7 +58,7 @@
             </div>
         </div>
     </section>
-    <section>
+    <section id="googly" role="tabpanel" tabindex="1" aria-labelledby="googly-nav">
         <div class='googly-eyes' id="googlyEyes">
             <div class='googly-eyes-container'>
                 <div class='eye googly-eye'></div>
@@ -66,10 +66,10 @@
             </div>
         </div>
     </section>
-    <section>
+    <section id="spinny" role="tabpanel" tabindex="1" aria-labelledby="spinny-nav">
         <div id="sphere" class="sphere-container"></div>
     </section>
-    <section>
+    <section id="circus" role="tabpanel" tabindex="1" aria-labelledby="circus-nav">
         <img alt="unicorn" src="img/unicorn.svg" class="unicorn" width="100" height="100">
         <div class='googly-eyes with-filter'>
             <div class='googly-eyes-container'>
