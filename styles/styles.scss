@@ -72,6 +72,9 @@ label {
 
   section {
     display: none;
+    &:focus {
+      outline: none;
+    }
   }
 }
 
