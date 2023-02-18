@@ -5,14 +5,14 @@ $(function () {
 
     var active = $('.active-tab').index(),
         content = $('.tabs-content section'),
-        tab = $('.tabs li'),
+        tab = $('.tabs button'),
         background = $(".vaporwave"),
         tune = document.createElement("audio");
 
     tune.src = "sound/vap-tune.opus";
     content.eq(active).show();
 
-    $('.tabs').on('click', 'li', function (e) {
+    $('.tabs').on('click', 'button', function (e) {
         var current = $(e.currentTarget),
             index = current.index();
 

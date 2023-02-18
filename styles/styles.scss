@@ -45,12 +45,15 @@ label {
   list-style: none;
   display: flex;
   justify-content: center;
-  font-weight: 700;
-  li {
+  button {
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-family: 'Zilla Slab', serif;
+    font-weight: 700;
+    font-size: $global-spacing*1;
     border-radius: $global-spacing*2;
+    border: 0;
     background-color: rgba($color-light, 0.1);
     color: $color-accent;
     padding: $global-spacing;
@@ -63,6 +66,9 @@ label {
     &.active-tab {
       background-color: $color-accent;
       color: $color-light;
+    }
+    &:focus {
+      outline: 3px solid lighten($color-accent, 20%);
     }
   }
 }
@@ -98,9 +104,10 @@ label {
   transform: rotateY(0deg) translateZ(-200px);
   animation-name: rotationMainContainer;
   animation-duration: 5s;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-play-state: running;
+  animation-direction: alternate;
 }
 
 .cube-face {
@@ -276,6 +283,9 @@ input[type=range] {
 }
 input[type=range]:focus {
   outline: none;
+  &::-webkit-slider-thumb {
+    outline: 3px solid lighten($color-accent, 20%);
+  }
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
@@ -295,6 +305,17 @@ input[type=range]::-webkit-slider-thumb {
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: $color-accent;
+}
+
+// Footer
+footer {
+  text-align: center;
+  padding-top: 160px;
+  color: $color-light;
+  opacity: .75;
+  & a {
+    color: $color-light;
+  }
 }
 
 
